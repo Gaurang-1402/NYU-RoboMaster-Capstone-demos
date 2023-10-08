@@ -1,0 +1,2 @@
+libtorch CPU version --> libtorch-cxx11-abi-shared-with-deps-2.1.0+cpu.zip
+https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.1.0%2Bcpu.zip
