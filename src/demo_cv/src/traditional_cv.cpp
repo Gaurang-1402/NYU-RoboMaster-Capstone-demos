@@ -3,7 +3,7 @@
 #include <cv_bridge/cv_bridge.hpp>
 #include <opencv2/opencv.hpp>
 #include <torch/script.h>
-#include <torchvision/vision.h>  // Ensure you have the TorchVision library available
+#include <torchvision/vision.h> 
 
 class ImageSubscriber : public rclcpp::Node
 {

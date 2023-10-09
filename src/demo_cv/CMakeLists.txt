@@ -27,13 +27,21 @@ ament_target_dependencies(image_publisher rclcpp sensor_msgs cv_bridge OpenCV am
 add_executable(traditional_cv src/traditional_cv.cpp)
 ament_target_dependencies(traditional_cv rclcpp sensor_msgs cv_bridge OpenCV)
 
+add_executable(deeplearning_cv src/deeplearning_cv.cpp)
+ament_target_dependencies(deeplearning_cv rclcpp sensor_msgs cv_bridge OpenCV)
+
 target_link_libraries(traditional_cv "${TORCH_LIBRARIES}")
 target_link_libraries(traditional_cv TorchVision::TorchVision)
+
+
+target_link_libraries(deeplearning_cv "${TORCH_LIBRARIES}")
+target_link_libraries(deeplearning_cv TorchVision::TorchVision)
 
 
 install(TARGETS
   image_publisher
   traditional_cv
+  deeplearning_cv
   DESTINATION lib/${PROJECT_NAME}
 )
 
