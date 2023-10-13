@@ -3,6 +3,7 @@
 #include <cv_bridge/cv_bridge.hpp>
 #include <opencv2/opencv.hpp>
 #include <torch/script.h>
+#include <torch/torch.h>
 #include <torchvision/vision.h>  
 #include <ament_index_cpp/get_package_share_directory.hpp>
 
@@ -12,8 +13,14 @@ class DeepLearningCV : public rclcpp::Node
 public:
     DeepLearningCV() : Node("deep_learning_cv")
     {
+        // Check and log GPU availability
+        if (torch::cuda::is_available()) {
+            RCLCPP_INFO(this->get_logger(), "GPU is available.");
+        } else {
+            RCLCPP_INFO(this->get_logger(), "GPU is not available.");
+        }
         subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
-            "image", 10, std::bind(&DeepLearningCV::on_image, this, std::placeholders::_1));
+            "video", 10, std::bind(&DeepLearningCV::on_image, this, std::placeholders::_1));
         
         std::string package_share_directory = ament_index_cpp::get_package_share_directory("demo_cv");
         std::string model_path = package_share_directory + "/models/best.torchscript";
@@ -91,8 +98,6 @@ void draw_license_plate_boxes(cv::Mat frame, at::Tensor results, std::string col
         cv::imshow("Webcam2", expanded_roi);
     }
 }
-
-
     void on_image(const sensor_msgs::msg::Image::SharedPtr msg)
     {
         cv_bridge::CvImagePtr cv_ptr;
@@ -132,6 +137,7 @@ void draw_license_plate_boxes(cv::Mat frame, at::Tensor results, std::string col
     
         // Forward pass
         auto output_tuple = model.forward({ img_tensor });
+        
         if (!output_tuple.isTuple()) {
             RCLCPP_ERROR(this->get_logger(), "Model output is not a tuple as expected");
             return;
@@ -142,6 +148,8 @@ void draw_license_plate_boxes(cv::Mat frame, at::Tensor results, std::string col
 
 
         draw_license_plate_boxes(frame, output, color_selector);
+        cv::imshow("Webcam1", frame);
+
         }
 
 

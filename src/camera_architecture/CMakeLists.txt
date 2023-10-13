@@ -6,7 +6,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-list(APPEND CMAKE_PREFIX_PATH "~/libtorch/share/cmake/Torch")
+list(APPEND CMAKE_PREFIX_PATH "~/Downloads/libtorch")
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -25,10 +25,6 @@ ament_target_dependencies(camera_publisher rclcpp sensor_msgs cv_bridge OpenCV)
 add_executable(image_display src/image_display.cpp)
 ament_target_dependencies(image_display rclcpp sensor_msgs cv_bridge OpenCV)
 
-# add_executable(faster_rcnn src/faster_rcnn.cpp)
-# ament_target_dependencies(faster_rcnn rclcpp sensor_msgs cv_bridge OpenCV)
-
-# target_link_libraries(faster_rcnn "${TORCH_LIBRARIES}")
 target_link_libraries(image_display "${TORCH_LIBRARIES}")
 
 install(TARGETS
