@@ -20,7 +20,7 @@ public:
             RCLCPP_INFO(this->get_logger(), "GPU is not available.");
         }
         subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
-            "video", 10, std::bind(&DeepLearningCV::on_image, this, std::placeholders::_1));
+            "camera/camera/color/image_raw", 10, std::bind(&DeepLearningCV::on_image, this, std::placeholders::_1));
         
         std::string package_share_directory = ament_index_cpp::get_package_share_directory("demo_cv");
         std::string model_path = package_share_directory + "/models/best.torchscript";

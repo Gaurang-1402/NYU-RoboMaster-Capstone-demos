@@ -25,12 +25,12 @@ ament_target_dependencies(camera_publisher rclcpp sensor_msgs cv_bridge OpenCV)
 add_executable(image_display src/image_display.cpp)
 ament_target_dependencies(image_display rclcpp sensor_msgs cv_bridge OpenCV)
 
+# target_link_libraries(faster_rcnn "${TORCH_LIBRARIES}")
 target_link_libraries(image_display "${TORCH_LIBRARIES}")
 
 install(TARGETS
   camera_publisher
   image_display
-  # faster_rcnn
   DESTINATION lib/${PROJECT_NAME}
 )
 

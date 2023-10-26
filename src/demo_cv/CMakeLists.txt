@@ -9,9 +9,6 @@ endif()
 enable_language(CUDA)
 set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc)
 
-find_package(CUDA REQUIRED)
-include_directories(${CUDA_INCLUDE_DIRS})
-
 list(APPEND CMAKE_PREFIX_PATH "~/Downloads/libtorch")
 
 # find dependencies
@@ -23,8 +20,6 @@ find_package(OpenCV REQUIRED)
 find_package(Torch REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(TorchVision REQUIRED)
-find_package(CUDA REQUIRED)
-
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -55,12 +50,6 @@ target_link_libraries(comp_traditional_cv TorchVision::TorchVision)
 
 target_link_libraries(video_publisher "${TORCH_LIBRARIES}")
 target_link_libraries(video_publisher TorchVision::TorchVision)
-
-target_link_libraries(traditional_cv ${CUDA_LIBRARIES})
-target_link_libraries(deeplearning_cv ${CUDA_LIBRARIES})
-target_link_libraries(comp_traditional_cv ${CUDA_LIBRARIES})
-target_link_libraries(video_publisher ${CUDA_LIBRARIES})
-
 
 
 install(TARGETS

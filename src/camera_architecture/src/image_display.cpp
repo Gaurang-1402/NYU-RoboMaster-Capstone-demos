@@ -12,7 +12,7 @@ public:
     ImageDisplay() : Node("image_display")
     {
         sub_ = this->create_subscription<sensor_msgs::msg::Image>(
-            "image_topic", 10,
+            "camera/camera/color/image_raw", 10,
             std::bind(&ImageDisplay::display, this, std::placeholders::_1));
     }
 
