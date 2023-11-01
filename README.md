@@ -1,6 +1,6 @@
 # NYU-RoboMaster-Capstone-demos
 
-## Environemnt setup for CPP
+## Environment setup for CPP
 
 https://github.com/Gaurang-1402/NYU-RoboMaster-Capstone-demos/wiki/Install-Libtorch-for-Cpp
 
