@@ -21,6 +21,8 @@ __pycache__/
 *.swp
 *.swo
 
+*.onnx
+
 # Ignore OS generated files
 .DS_Store
 Thumbs.db

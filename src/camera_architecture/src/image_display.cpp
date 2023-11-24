@@ -11,9 +11,15 @@ class ImageDisplay : public rclcpp::Node
 public:
     ImageDisplay() : Node("image_display")
     {
+        // FOR INTEL REALDEPTH
+        // sub_ = this->create_subscription<sensor_msgs::msg::Image>(
+        //     "camera/camera/color/image_raw", 10,
+        //     std::bind(&ImageDisplay::display, this, std::placeholders::_1));
+
         sub_ = this->create_subscription<sensor_msgs::msg::Image>(
-            "camera/camera/color/image_raw", 10,
+            "/image_topic", 10,
             std::bind(&ImageDisplay::display, this, std::placeholders::_1));
+
     }
 
 private:
